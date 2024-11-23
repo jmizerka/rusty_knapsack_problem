@@ -12,15 +12,8 @@ pub struct Knapsack {
     pub capacity: u32,
 }
 
-impl Knapsack {
-    pub fn total_value(&self) -> u32 {
-        self.items.iter().map(|item| item.value).sum()
-    }
-
-    pub fn total_weight(&self) -> u32 {
-        self.items.iter().map(|item| item.weight).sum()
-    }
-}
+pub fn total_value(items:&Vec<Item>) -> u32 {items.iter().map(|item| item.value).sum()}
+pub fn total_weight(items:&Vec<Item>) -> u32 {items.iter().map(|item| item.weight).sum()}
 
 pub fn generate_items(n: usize) -> Vec<Item> {
     (0..n).map(|_| Item {
@@ -65,7 +58,7 @@ mod tests {
     fn test_total_value() {
         let items: Vec<Item> = setup_items_vec();
         let knapsack = Knapsack { items, capacity: 100 };
-        let total_val = knapsack.total_value();
+        let total_val = total_value(&knapsack.items);
         assert_eq!(total_val, 160)
     }
 
@@ -73,7 +66,7 @@ mod tests {
     fn test_total_weight() {
         let items: Vec<Item> = setup_items_vec();
         let knapsack = Knapsack { items, capacity: 100 };
-        let total_weight = knapsack.total_weight();
+        let total_weight =total_weight(&knapsack.items);
         assert_eq!(total_weight, 30)
     }
 
